@@ -60,7 +60,7 @@ export default function RegisterScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFD700",
+    backgroundColor: "#b4b1a2ff",
     justifyContent: "center",
     alignItems: "center",
   },
