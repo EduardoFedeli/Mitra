@@ -1,50 +1,90 @@
-# Welcome to your Expo app 👋
+# 🚀 Mitra: Sistema de Gestão de Investimentos (Global Solution - CP3)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este projeto é um aplicativo móvel desenvolvido em React Native para gerenciar investimentos, oferecendo um sistema de autenticação e funcionalidades CRUD (Criar, Ler, Atualizar, Deletar).
 
-## Get started
+## 🧑‍💻 Integrantes do Grupo
 
-1. Install dependencies
+| Nome Completo | RM |
+| :--- | :--- |
+| Eduardo Fedeli Souza | 550132 |
+| Gabriel Torres Luiz | 98600 |
+| Otavio Vitoriano | 552012 |
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 💡 Funcionalidades do Aplicativo
 
-   ```bash
-   npx expo start
-   ```
+### 1. Sistema de Autenticação (Login e Registro)
+- **Tela de Login:** Permite que o usuário acesse a aplicação.
+- **Tela de Registro:** Permite a criação de uma nova conta de usuário.
+- **Contexto de Autenticação (`AuthContext`):** Gerencia o estado do usuário (`user` e `loading`) e o token, garantindo que o usuário logado seja redirecionado para a `HomeScreen`.
+- **Logout:** Função para encerrar a sessão do usuário.
 
-In the output, you'll find options to open the app in a
+### 2. Gestão de Investimentos (CRUD Completo)
+A tela `InvestmentScreen` implementa todas as operações de gestão de dados consumindo a API Restful.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+| Funcionalidade | Operação | Detalhes |
+| :--- | :--- | :--- |
+| **Listagem** | **READ (GET)** | Exibe todos os investimentos do usuário. Lida com estados de carregamento (`loading`) e erro de forma visual. |
+| **Adicionar** | **CREATE (POST)** | Abre um modal de formulário para criar um novo investimento, enviando os dados para a API. |
+| **Editar** | **UPDATE (PUT)** | Permite selecionar um investimento existente, abre o modal preenchido e envia a atualização para a API. |
+| **Excluir** | **DELETE (DELETE)** | Exclui um investimento após uma confirmação de segurança (`Alert.alert`). |
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 3. Tratamento de Erros e UX (Atendimento aos Critérios de Validação)
 
-## Get a fresh project
+- **Validação de Formulários:** Campos obrigatórios são verificados antes do envio (ex: nome e valor do investimento).
+- **Feedback de Erro (30pts - Validação):**
+    - Se a API falhar ao carregar os dados, exibe uma mensagem de erro clara e informativa, junto a um **botão "Tentar Novamente"** para reexecutar a função `loadInvestments()`.
+    - Erros de Login/Registro e operações CRUD são tratados com `Alert.alert` para feedback imediato.
+- **Navegação Fluida (30pts - Navegação):**
+    - Uso do `react-navigation` com `NativeStack` para uma experiência nativa.
+    - O botão de **`< Voltar`** e o botão **"Voltar para Home"** na tela `Investment` garantem o retorno imediato ao estado anterior.
 
-When you're ready, run:
+### 4. Arquitetura e Organização (10pts)
+O projeto segue uma arquitetura modular clara, utilizando TypeScript e separação de responsabilidades:
 
-```bash
-npm run reset-project
-```
+- **`/src`**
+    - **`/components`:** Componentes reutilizáveis (`Button`).
+    - **`/screens`:** Telas da aplicação (`LoginScreen`, `HomeScreen`, `InvestmentScreen`).
+    - **`/contexts`:** Gerenciamento de estado global (`AuthContext`).
+    - **`/navigation`:** Configuração do navegador e tipagem (`types.ts`, `AppNavigator`).
+    - **`/services`:** Conexão com a API (`api.ts`).
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 💻 Como Executar o Projeto
 
-To learn more about developing your project with Expo, look at the following resources:
+Siga os passos abaixo para clonar, instalar dependências e rodar o aplicativo em seu emulador Android/iOS ou dispositivo físico (via Expo Go).
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+#### Pré-requisitos
+1.  **Node.js e npm/yarn:** Instalados na máquina.
+2.  **Expo CLI:** Recomendado para iniciar o projeto.
+    
+    npm install -g expo-cli
+    
+3.  **Emulador/Dispositivo:** Um emulador Android Studio, ou o aplicativo **Expo Go** instalado no seu celular.
 
-## Join the community
+#### 1. Clonar o Repositório
+git clone https://github.com/EduardoFedeli/Mitra.git
 
-Join our community of developers creating universal apps.
+cd Mitra
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+2. Instalar as Dependências
+Execute este comando para instalar todas as bibliotecas e pacotes necessários:
+
+npm install 
+
+3. Iniciar a API (Mock/Backend)
+AVISO: Este aplicativo consome dados de uma API externa (ou de um mock local, como o JSON Server). É obrigatório que o backend esteja ativo e acessível na porta configurada (geralmente http://localhost:3000) para que a aplicação funcione corretamente.
+
+4. Iniciar o Aplicativo Expo
+Inicie o servidor de desenvolvimento do React Native:
+
+Bash
+
+npx expo start
+Ao rodar o comando, o Expo CLI abrirá uma página no navegador e exibirá um QR Code no seu terminal.
+
+5. Abrir no Emulador ou Dispositivo
+Para Android: Pressione a tecla a no terminal.
